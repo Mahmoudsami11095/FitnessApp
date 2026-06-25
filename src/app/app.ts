@@ -1,12 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { TranslateService, TranslatePipe, TranslateDirective } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule, DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TranslateModule, ButtonModule, CommonModule],
+  imports: [RouterOutlet, TranslatePipe, TranslateDirective, ButtonModule, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -19,7 +19,7 @@ export class App {
   currentLang = signal('en');
 
   constructor() {
-    this.translate.setDefaultLang('en');
+    this.translate.setFallbackLang('en');
     this.translate.use('en');
     this.updateDirection('en');
   }

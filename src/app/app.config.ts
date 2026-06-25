@@ -1,22 +1,17 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader, provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeuix/themes/aura';
 
 import { routes } from './app.routes';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './i18n/', '.json');
-}
-
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZonelessChangeDetection(),
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),
@@ -28,15 +23,13 @@ export const appConfig: ApplicationConfig = {
             }
         }
     }),
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        defaultLanguage: 'en',
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-        }
-      })
-    )
+    provideTranslateService({
+      lang: 'en',
+      fallbackLang: 'en'
+    }),
+    provideTranslateHttpLoader({
+      prefix: './i18n/',
+      suffix: '.json'
+    })
   ]
 };
