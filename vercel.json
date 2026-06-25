@@ -1,0 +1,5 @@
+{
+  "framework": "angular",
+  "outputDirectory": "dist/FitnessApp/browser",
+  "buildCommand": "npm run build"
+}
