@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Global Styles */
+body {
+    @apply m-0 p-0 font-sans antialiased text-gray-900 bg-white dark:text-white dark:bg-gray-900;
+}

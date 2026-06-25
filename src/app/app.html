@@ -1,0 +1,51 @@
+<div class="min-h-screen transition-colors duration-300 dark:bg-gray-900 bg-gray-50 flex flex-col items-center justify-center font-sans p-6">
+  <div class="max-w-3xl w-full bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-8 text-center transition-all">
+    
+    <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-4">
+      <h1 class="text-3xl font-bold text-primary-500 dark:text-primary-400">
+        {{ 'APP_TITLE' | translate }}
+      </h1>
+      
+      <div class="flex gap-4">
+        <p-button 
+          [label]="'CHANGE_LANGUAGE' | translate" 
+          [icon]="currentLang() === 'en' ? 'pi pi-language' : 'pi pi-language'"
+          (onClick)="toggleLanguage()" 
+          severity="secondary" 
+          [outlined]="true"
+          size="small">
+        </p-button>
+
+        <p-button 
+          [label]="'TOGGLE_DARK_MODE' | translate" 
+          [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+          (onClick)="toggleDarkMode()" 
+          severity="contrast" 
+          [outlined]="true"
+          size="small">
+        </p-button>
+      </div>
+    </div>
+
+    <div class="py-12 flex flex-col items-center space-y-6">
+      <i class="pi pi-heart-fill text-6xl text-red-500 dark:text-red-400 drop-shadow-md"></i>
+      <h2 class="text-4xl font-extrabold text-gray-800 dark:text-gray-100">
+        {{ 'WELCOME' | translate }}
+      </h2>
+      <p class="text-lg text-gray-500 dark:text-gray-400 max-w-lg">
+        This is a modern Angular application scaffolded with Tailwind CSS, PrimeNG, dark mode support, and English/Arabic localization.
+      </p>
+      
+      <p-button 
+        [label]="'START_JOURNEY' | translate" 
+        icon="pi pi-arrow-right" 
+        [iconPos]="currentLang() === 'ar' ? 'left' : 'right'"
+        size="large"
+        severity="success"
+        class="mt-4">
+      </p-button>
+    </div>
+  </div>
+  
+  <router-outlet></router-outlet>
+</div>
